@@ -225,6 +225,9 @@ compare_inode = 1
 # guarantee that any changes have been committed to disk.
 fsync_directories = None
 
+# If set, not a single fsync() call will be made.
+no_fsync = 0
+
 # If set, exit with error instead of dropping ACLs or ACL entries.
 never_drop_acls = None
 

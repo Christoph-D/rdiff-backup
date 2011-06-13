@@ -345,6 +345,14 @@ This will disable writing to the file_statistics file in the
 rdiff-backup-data directory.  rdiff-backup will run slightly quicker
 and take up a bit less space.
 .TP
+.B \-\-no-fsync
+Avoid all calls to
+.BR fsync (2).
+In case of unexpected power-loss this could result in a broken backup
+repository. Only use this if you are absolutely sure the machine(s)
+running rdiff-backup will not crash or if you can live with a broken
+backup repository.
+.TP
 .BI \-\-no-hard-links
 Don't replicate hard links on destination side.  If many hard-linked
 files are present, this option can drastically decrease memory usage.

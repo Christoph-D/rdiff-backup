@@ -77,6 +77,7 @@ def parse_cmdlineoptions(arglist):
 		  "list-increment-sizes", "never-drop-acls",
 		  "max-file-size=", "min-file-size=",
 		  "no-acls", "no-carbonfile",
+		  "no-fsync",
 		  "no-compare-inode", "no-compression", "no-compression-regexp=",
 		  "no-eas", "no-file-statistics", "no-hard-links", "null-separator",
 		  "override-chars-to-quote=", "parsable-output",
@@ -167,6 +168,7 @@ def parse_cmdlineoptions(arglist):
 			Globals.set("no_compression_regexp_string", arg)
 		elif opt == "--no-eas": Globals.set("eas_active", 0)
 		elif opt == "--no-file-statistics": Globals.set('file_statistics', 0)
+		elif opt == "--no-fsync": Globals.set("no_fsync", 1)
 		elif opt == "--no-hard-links": Globals.set('preserve_hardlinks', 0)
 		elif opt == "--null-separator": Globals.set("null_separator", 1)
 		elif opt == "--override-chars-to-quote":

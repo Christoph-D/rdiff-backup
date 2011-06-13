@@ -1273,6 +1273,8 @@ class RPath(RORPath):
 		This can be useful for directories.
 
 		"""
+		if Globals.no_fsync:
+			return
 		if not fp: self.conn.rpath.RPath.fsync_local(self)
 		else: os.fsync(fp.fileno())
 
@@ -1284,6 +1286,8 @@ class RPath(RORPath):
 
 		"""
 		assert self.conn is Globals.local_connection
+		if Globals.no_fsync:
+			return
 		try:
 			fd = os.open(self.path, os.O_RDONLY)
 			os.fsync(fd)
