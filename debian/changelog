@@ -1,3 +1,9 @@
+rdiff-backup (1.2.8-7-nofsync) unstable; urgency=low
+
+  * Patch add --no-fsync.
+
+ -- Christoph Dittmann <github@christoph-d.de>  Mon, 08 Dec 2014 21:23:34 +0100
+
 rdiff-backup (1.2.8-7) unstable; urgency=low
 
   * debian/control
