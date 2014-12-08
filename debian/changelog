@@ -1,22 +1,29 @@
-rdiff-backup (1.2.8-5ubuntu3) natty; urgency=low
+rdiff-backup (1.2.8-7) unstable; urgency=low
 
-  * Rebuild to add support for python 2.7.
+  * debian/control
+    - bump Standards-Version to 3.9.2
+    - add X-Python-Version field
+    - remove dpatch build-dependency
+  * debian/source/format
+    - switch to 3.0 (quilt)
+  * debian/patches
+    - migrated *.dpatch to quilt format
+    - add 02_python_2.6_deprecationwarning.diff patch (Closes:#587370)
+    - add 03_fix_hardlinks.diff (Closes:#558035)
+  * debian/rules
+    - switch to dh --with python2
 
- -- Matthias Klose <doko@ubuntu.com>  Fri, 03 Dec 2010 00:13:58 +0000
+ -- Carl Chenet <chaica@ohmytux.com>  Wed, 04 Jan 2012 02:23:04 +0100
 
-rdiff-backup (1.2.8-5ubuntu2) lucid; urgency=low
+rdiff-backup (1.2.8-6) unstable; urgency=low
 
-  * Restoring proper 01_fix_restricted_test-server_option.dpatch (LP: #524070)
+  * debian/control
+    - switching Maintainer to PAPT team
+    - switching Uploaders to Carl Chenet <chaica@ohmytux.com>
+  * debian/patches/01_fix_restricted_test-server_option.dpatch
+    - added one line accidentely removed in the previous patch (Closes:#570627)
 
- -- Andreas Olsson <andol@ubuntu.com>  Sat, 20 Feb 2010 13:41:56 +0100
-
-rdiff-backup (1.2.8-5ubuntu1) lucid; urgency=low
-
-  * Merge from debian testing, remaining changes:
-    - 02_python_2.6 deprecationwarning.dpatch: Handling Python 2.6 deprecation
-      annoying warnings.
-
- -- Andreas Wenning <awen@awen.dk>  Fri, 29 Jan 2010 09:59:53 +0100
+ -- Carl Chenet <chaica@ohmytux.com>  Sat, 20 Feb 2010 12:29:55 +0100
 
 rdiff-backup (1.2.8-5) unstable; urgency=low
 
@@ -73,49 +80,12 @@ rdiff-backup (1.2.8-2) unstable; urgency=low
 
  -- Daniel Baumann <daniel@debian.org>  Sun, 09 Aug 2009 11:41:00 +0200
 
-rdiff-backup (1.2.8-1ubuntu2) karmic; urgency=low
-
-  * 02_python_2.6_deprecationwarning.dpatch: Handling Python 2.6 deprecation 
-   annoying warnings (LP: #436035)
-
- -- Andreas Olsson <andol@ubuntu.com>  Sat, 03 Oct 2009 19:37:30 +0200
-
-rdiff-backup (1.2.8-1ubuntu1) karmic; urgency=low
-
-  * Merge from debian unstable (LP: #339799), remaining changes:
-    - Add --install-layout=deb to place files in /usr
-    - Changed --prefix=$(CURDIR)/debian/rdiff-backup/usr to 
-      --root=$(CURDIR)/debian/rdiff-backup due to --prefix & --install-deb 
-      being mutually exclusive now.
-    - Adds 01_fix_restricted_test-server_option.dpatch to make --test-server
-      work while --restrict is in effects.
-    - Adds dpatch entries to debian/control and debian/rules.
-  * Closes LP: #329722.
-
- -- Andreas Olsson <andol@ubuntu.com>  Thu, 14 May 2009 20:13:06 +0200
-
 rdiff-backup (1.2.8-1) unstable; urgency=low
 
   * Merging upstream version 1.2.8 (Closes: #520089):
     - Don't crash on zlib errors (Closes: #518531).
 
  -- Daniel Baumann <daniel@debian.org>  Thu, 19 Mar 2009 06:25:00 +0100
-
-rdiff-backup (1.2.7-1ubuntu2) jaunty; urgency=lown
-
-  * Makes --restrict and --test-server work together again (LP #349072)
-  * Adds dpatch, to handle 01_fix_restricted_test-server_option.dpatch
-	
- -- Andreas Olsson <andreas@arrakis.se>  Wed, 01 Apr 2009 23:51:12 +0200
-
-rdiff-backup (1.2.7-1ubuntu1) jaunty; urgency=low
-
-  * Add --install-layout=deb to place files in /usr (LP: #345086)
-  * Changed --prefix=$(CURDIR)/debian/rdiff-backup/usr to 
-    --root=$(CURDIR)/debian/rdiff-backup due to --prefix & --install-deb being
-    mutually exclusive now.
-
- -- Andrew Mitchell <ajmitch@ubuntu.com>  Thu, 19 Mar 2009 10:59:07 +1300
 
 rdiff-backup (1.2.7-1) unstable; urgency=low
 
@@ -494,4 +464,3 @@ rdiff-backup (0.4.4-1) unstable; urgency=low
   * Initial Release, lintian clean.  Closes: #133442.
 
  -- John Goerzen <jgoerzen@complete.org>  Mon, 11 Feb 2002 14:15:42 -0500
-

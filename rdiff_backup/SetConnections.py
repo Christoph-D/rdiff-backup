@@ -135,10 +135,10 @@ def init_connection(remote_cmd):
 	if not remote_cmd: return Globals.local_connection
 
 	Log("Executing " + remote_cmd, 4)
-	if os.name == "nt":
+	if map(int, sys.version.split()[0].split('.')[:2]) >= [2, 6]:
 		import subprocess
 		try:
-			process = subprocess.Popen(remote_cmd, shell=False, bufsize=0,
+			process = subprocess.Popen(remote_cmd, shell=True, bufsize=0,
 								stdin=subprocess.PIPE, 
 								stdout=subprocess.PIPE)
 			(stdin, stdout) = (process.stdin, process.stdout)
@@ -241,20 +241,25 @@ def CloseConnections():
 	Globals.backup_reader = Globals.isbackup_reader = \
 		  Globals.backup_writer = Globals.isbackup_writer = None
 
-def TestConnections():
+def TestConnections(rpaths):
 	"""Test connections, printing results"""
 	if len(Globals.connections) == 1: print "No remote connections specified"
 	else:
-		for i in range(1, len(Globals.connections)): test_connection(i)
+		assert len(Globals.connections) == len(rpaths) + 1
+		for i in range(1, len(Globals.connections)):
+			test_connection(i, rpaths[i-1])
 
-def test_connection(conn_number):
+def test_connection(conn_number, rp):
 	"""Test connection.  conn_number 0 is the local connection"""
 	print "Testing server started by: ", __conn_remote_cmds[conn_number]
 	conn = Globals.connections[conn_number]
 	try:
 		assert conn.Globals.get('current_time') is None
-		assert type(conn.os.listdir('.')) is list
 		version = conn.Globals.get('version')
+		try:
+			assert type(conn.os.getuid()) is int
+		except AttributeError: # Windows doesn't support os.getuid()
+			assert type(conn.os.listdir(rp.path)) is list
 	except:
 		sys.stderr.write("Server tests failed\n")
 		raise
